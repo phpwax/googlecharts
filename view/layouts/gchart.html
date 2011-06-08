@@ -9,6 +9,8 @@
 <body id="gcharts-body" class='gcharts'>
   <?=$content_for_layout?>
   
+  <div id="pie-example" style='height:300px; width:300px;'></div>
+  
   
   
   <script src='http://www.google.com/jsapi?'  type='text/javascript'></script>
@@ -17,6 +19,6 @@
     google.load('visualization', '1', {'packages':['corechart']});
   </script>
   
-    <?=js_bundle("core", array(), "google-charts")?>
+  <?=js_bundle("core", array(), "gchart")?>
 </body>
 </html>

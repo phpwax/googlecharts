@@ -15,6 +15,26 @@ var _g_config = [
     options:{
       title:'Activties'
     }
+  },
+  {
+    selector:"#area-example",
+    type:"AreaChart",
+    columns:[
+      {type:'string', name:'Month'},
+      {type:'number', name:'Visits'},
+      {type:'number', name:'Conversions'}      
+    ],
+    data:[
+      ['Jan 2011', 100, 1],
+      ['Feb 2011', 500, 30],
+      ['March 2011', 20, 0],
+      ['April 2011', 323, 5]
+    ],
+    options:{
+      title:'Stats',
+      legend:"bottom",
+      pointSize:5
+    }
   }
 ];
 

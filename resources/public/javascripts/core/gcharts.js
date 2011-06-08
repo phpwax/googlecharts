@@ -16,7 +16,7 @@ jQuery(document).bind("_g.chart", function(e, setup){
 jQuery(document).bind("_g.draw", function(e, runall){
   var graph = jQuery(e.target), table, options, chart;
   //call all of the data setup functions if asked to
-  if(runall) graph.trigger("_g.options").trigger("_g.table").trigger("_g.cols").trigger("_g.data");
+  if(runall) graph.trigger("_g.options").trigger("_g.table").trigger("_g.cols").trigger("_g.events").trigger("_g.data");
   
   table = graph.data("_g.table");
   options = graph.data("_g.options");
@@ -65,6 +65,21 @@ jQuery(document).bind("_g.data", function(e, setup){
       
   table.addRows(data);    
   graph.data("_g.table", table);
-
+});
+/**
+ * bind any custom events
+ */
+jQuery(document).bind("_g.events", function(e, setup){
+  var graph = jQuery(e.target),
+      config = graph.data("_g.config"),
+      events = setup||config.events
+      ;
+  if(events && events.length){
+    for(var i in events){
+      var t = graph.data("_g."+events[i].target);
+      google.visualization.events.addListener(t, events[i].type, events[i].func);
+    }
+  }
+  
 });
 

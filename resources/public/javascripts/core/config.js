@@ -25,7 +25,7 @@ jQuery(document).ready(function(){
     if(_obj && _obj.length){
       console.log("running graph - "+_c.selector);
       //set the config on the objects data, trigger the init 
-      _obj.data("_g.config", _c).trigger("_g.chart").trigger("_g.draw", [true]).trigger("_g.options", [{title:"test redraw"}]).trigger("_g.draw");
+      _obj.data("_g.config", _c).trigger("_g.chart").trigger("_g.draw", [true]).trigger("_g.draw");
     }
   }
   

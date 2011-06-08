@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" id="gcharts">
+<head>
+	<?=css_bundle("core", array('media'=>'all'))?>
+
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<title>Charts</title>
+</head>
+<body id="gcharts-body" class='gcharts'>
+  <?=$content_for_layout?>
+  
+  
+  
+  <script src='http://www.google.com/jsapi?'  type='text/javascript'></script>
+  <script type='text/javascript'>
+    google.load('jquery', '1.5');
+    google.load('visualization', '1', {'packages':['corechart']});
+  </script>
+  
+    <?=js_bundle("core", array(), "google-charts")?>
+</body>
+</html>

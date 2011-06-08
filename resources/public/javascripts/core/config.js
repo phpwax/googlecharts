@@ -35,6 +35,11 @@ var _g_config = [
       legend:"bottom",
       pointSize:5
     }
+    /*
+    ,events:[
+      {target:'table', event:'clicked', func:function(){alert("yes!");}}
+    ]
+    */
   }
 ];
 

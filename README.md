@@ -79,7 +79,7 @@ These are drawing options used to set titles, axis setup, background colours etc
     
 There is also a more advanced **events** parameter that can be used for custom event handling; however **this is untested**.
 
-You can take a look at the example/config.js to see a functional example.
+You can take a look at the `example/config.js` to see a functional example.
 
 
 #### Standard Initialisation
@@ -92,11 +92,44 @@ Once you have a working configuration, then its really easy to display the graph
     
 **_gconfig** being your configuration array variable.
 
-That will automatically create all the graphs you have setup; that might not always be suitable, so you have do things differently if you want.
+That will automatically create all the graphs you have setup. The `_g.start` event thats referenced in the code above simple loops over your configuration array and triggers events in a set order:
 
-The `_g.start` event thats referenced in the code above simple loops over your configuration array and triggers events in a set order:
-
-- [_g.config](#gconfig "_g.config")
+- _g.config
 - _g.chart
 - _g.draw
+
+You might want to do things differently, only turning on charts at certain points or events etc, which you can do by triggering the events yourself.
+
+#### Custom Initialisation
+
+All the events used by `_g.start` can be called separately whenever you like as long as you pass along the correct data. 
+
+**Example of only triggering a chart on click**
+
+Instead of running `_g.start` you could do this:
+
+    jQuery("a.chart").click(function(e){
+      e.preventDefault();
+      var config = _gconfig[0], obj = jQuery(config.selector);
+      obj.trigger("_g.config", _c).trigger("_g.chart").trigger("_g.draw", [true]);  
+    });
+
+This is simply getting the first chart from the config array and creating it in the same way `_g.start` would.
+
+**Example of changing some setting after being draw**
+
+After running `_g.start` as normal you could use a click event to change the data set or columns names etc quite easily:
+
+    jQuery("a.update").click(function(e){
+      e.preventDefault();
+      var relatedchart = jQuery(this).data("chart"), 
+          newcols = [{type:'string', name:'Ingredient'}, {type:'number', name:'Quantity'}], 
+          newdata = [['Eggs', 3], ['Onions', 1]],
+          newoptions = {title:'Recipe'};
+      relatedchart.trigger("_g.options", newoptions).trigger("_g.cols", newcols).trigger("_g.data", newdata).trigger("_g.draw");
+    }); 
+    
+It does assume that the clicked a tag has the chart div (the results of finding the `selector`) assigned to its data. 
+
+If it finds that then it changes the name of the chart, the columns and data to the new ones set and then triggers a redraw.
 

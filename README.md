@@ -116,7 +116,7 @@ Instead of running `_g.start` you could do this:
 
 This is simply getting the first chart from the config array and creating it in the same way `_g.start` would.
 
-**Example of changing some setting after being draw**
+**Example of changing config after being drawn**
 
 After running `_g.start` as normal you could use a click event to change the data set or columns names etc quite easily:
 

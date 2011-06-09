@@ -1,7 +1,22 @@
 /*** jquery triggers **/
-
 /**
- * init - simply creates a google data object
+ *
+ */
+jQuery(document).bind("_g.start", function(e, config){
+  for(var x in config){
+    var _c = config[x], _obj = jQuery(_c.selector);
+    if(_obj && _obj.length) _obj.trigger("_g.config", _c).trigger("_g.chart").trigger("_g.draw", [true]);
+  }
+});
+/**
+ * setup the config values
+ */
+jQuery(document).bind("_g.config", function(e, setup){
+  var graph = jQuery(e.target);
+  graph.data("_g.config", setup);
+});
+/**
+ * simply creates a google data object
  */
 jQuery(document).bind("_g.chart", function(e, setup){
   var graph = jQuery(e.target),
@@ -16,7 +31,7 @@ jQuery(document).bind("_g.chart", function(e, setup){
 jQuery(document).bind("_g.draw", function(e, runall){
   var graph = jQuery(e.target), table, options, chart;
   //call all of the data setup functions if asked to
-  if(runall) graph.trigger("_g.options").trigger("_g.table").trigger("_g.cols").trigger("_g.events").trigger("_g.data");
+  if(runall) graph.trigger("_g.config").trigger("_g.options").trigger("_g.table").trigger("_g.cols").trigger("_g.events").trigger("_g.data");
   
   table = graph.data("_g.table");
   options = graph.data("_g.options");
@@ -52,7 +67,7 @@ jQuery(document).bind("_g.cols", function(e, setup){
       cols = setup||config.columns,
       table = graph.data("_g.table")
       ;
-  for(var a in cols) table.addColumn(cols[a].type, cols[a].name);  
+  for(var a in cols) table.addColumn(cols[a].type, cols[a].name);
 });
 /**
  * set the datatable on the object

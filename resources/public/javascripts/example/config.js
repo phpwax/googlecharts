@@ -1,4 +1,4 @@
-var _g_config = [
+var _gconfig = [
   {
     selector:"#pie-example",
     type:"PieChart",
@@ -45,13 +45,6 @@ var _g_config = [
 
 jQuery(document).ready(function(){
   
-  for(var x in _g_config){
-    var _c = _g_config[x], _obj = jQuery(_c.selector);
-    if(_obj && _obj.length){
-      console.log("running graph - "+_c.selector);
-      //set the config on the objects data, trigger the init 
-      _obj.data("_g.config", _c).trigger("_g.chart").trigger("_g.draw", [true]).trigger("_g.draw");
-    }
-  }
+  jQuery(document).trigger("_g.start", [_gconfig]);
   
 });

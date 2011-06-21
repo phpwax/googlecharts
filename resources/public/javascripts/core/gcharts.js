@@ -67,7 +67,7 @@ jQuery(document).bind("_g.cols", function(e, setup){
       cols = setup||config.columns,
       table = graph.data("_g.table")
       ;
-  for(var a in cols) table.addColumn(cols[a].type, cols[a].name);
+    for(var a in cols) if(typeof cols[a] != "function") table.addColumn(cols[a].type, cols[a].name);
 });
 /**
  * set the datatable on the object
